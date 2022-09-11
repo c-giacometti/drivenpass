@@ -31,13 +31,29 @@ export async function getAllNotes(req: Request, res: Response){
 
 export async function getNoteById(req: Request, res: Response){
 
+    const { userId } = res.locals;
     const { id } = req.params;
+
+    if(isNaN(parseInt(id))){
+        return res.sendStatus(400);
+    }
+
+    const note = await noteService.getById(userId, parseInt(id), "find");
+
+    res.status(200).send(note);
 
 }
 
 export async function deleteNote(req: Request, res: Response){
 
+    const { userId } = res.locals;
     const { id } = req.params;
+
+    if(isNaN(parseInt(id))){
+        return res.sendStatus(400);
+    }
+
+    await noteService.getById(userId, parseInt(id), "delete");
 
     res.status(200).send("note deleted successfully");
 }

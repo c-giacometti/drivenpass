@@ -1,5 +1,5 @@
 import { Router } from "express";
-import { createNote, getAllNotes } from "../controllers/noteController.js";
+import { createNote, deleteNote, getAllNotes, getNoteById } from "../controllers/noteController.js";
 import validateToken from "../middlewares/tokenMidlleware.js";
 
 const router = Router();
@@ -11,7 +11,7 @@ router
 
 router
     .route("/notes/:id")
-    .get(validateToken)
-    .delete(validateToken);
+    .get(validateToken, getNoteById)
+    .delete(validateToken, deleteNote);
 
 export default router;
