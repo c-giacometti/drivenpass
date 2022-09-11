@@ -1,7 +1,7 @@
 import { User } from "@prisma/client";
 import connection from "../../database/database.js";
 
-export type IUserInsertData = Omit<User, 'id' | 'createdAt'>;
+export type IUserInsertData = Omit<User, "id" | "createdAt">;
 
 export async function findById(id: number){
 

@@ -1,7 +1,7 @@
-import { Note } from '@prisma/client';
+import { Note } from "@prisma/client";
 import connection from "../../database/database.js";
 
-export type INoteData = Omit<Note, 'id' | 'createdAt'>;
+export type INoteData = Omit<Note, "id" | "createdAt">;
 
 export async function insertNote(noteData: INoteData){
 

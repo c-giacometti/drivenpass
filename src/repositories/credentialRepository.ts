@@ -1,7 +1,7 @@
 import { Credential } from "@prisma/client";
 import connection from "../../database/database.js";
 
-export type ICredentialData = Omit<Credential, 'id' | 'createdAt'>;
+export type ICredentialData = Omit<Credential, "id" | "createdAt">;
 
 export async function insertCredential(credentialData: ICredentialData){
 
