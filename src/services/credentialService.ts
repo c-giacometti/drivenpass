@@ -1,3 +1,4 @@
+import { number } from "joi";
 import * as credentialRepository from "../repositories/credentialRepository.js";
 import { decryptSensitiveData, encryptSensitiveData } from "../utils/encryptUtil.js";
 
@@ -38,7 +39,8 @@ export async function getAll(
 
 export async function getById(
     userId: number, 
-    id: number
+    id: number,
+    action: string
 ){
 
     const credential = await credentialRepository.findCredentialById(id);
@@ -53,12 +55,23 @@ export async function getById(
     if(userId !== credential.userId){
         throw {
             type: "error_forbidden",
-            message: "you can't access this credential"
+            message: "access denied"
         }
     }
 
-    const decryptedPassword = decryptSensitiveData(credential.password);
+    if(action === "find"){
+        const decryptedPassword = decryptSensitiveData(credential.password);
+        return {...credential, password: decryptedPassword };
+    }
 
-    return {...credential, password: decryptedPassword };
+    if(action === "delete"){
+        await credentialRepository.deleteCredential(id);
+        return;
+    }
+
+    throw {
+        type: "error_bad_request",
+        message: "coundn't proccess request"
+    }    
 
 }

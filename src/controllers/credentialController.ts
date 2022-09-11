@@ -44,8 +44,23 @@ export async function getCredentialById(req: Request, res: Response){
         return res.sendStatus(400);
     }
 
-    const credential = await credentialService.getById(userId, parseInt(id));
+    const credential = await credentialService.getById(userId, parseInt(id), "find");
 
     res.status(200).send(credential);
+
+}
+
+export async function deleteCredential(req: Request, res: Response){
+
+    const { userId } = res.locals;
+    const { id } = req.params;
+
+    if(isNaN(parseInt(id))){
+        return res.sendStatus(400);
+    }
+
+    await credentialService.getById(userId, parseInt(id), "delete");
+
+    res.status(200).send("credential deleted sucessfully");
 
 }

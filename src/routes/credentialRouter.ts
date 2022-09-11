@@ -1,5 +1,5 @@
 import { Router } from "express";
-import { createCredential, getAllCredentials, getCredentialById } from "../controllers/credentialController.js";
+import { createCredential, deleteCredential, getAllCredentials, getCredentialById } from "../controllers/credentialController.js";
 import validateToken from "../middlewares/tokenMidlleware.js";
 
 const router = Router();
@@ -10,8 +10,8 @@ router
     .get(validateToken, getAllCredentials);
 
 router
-    .route("/:id/credentials")
+    .route("/credentials/:id")
     .get(validateToken, getCredentialById)
-    .delete();
+    .delete(validateToken, deleteCredential);
 
 export default router;
