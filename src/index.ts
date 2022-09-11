@@ -4,6 +4,7 @@ import cors from "cors";
 import dotenv from "dotenv";
 
 import authRouter from "./routes/authRouter.js";
+import credentialRouter from "./routes/credentialRouter.js";
 import errorHandler from "./middlewares/errorHandler.js";
 
 dotenv.config();
@@ -14,6 +15,7 @@ server.use(cors());
 server.use(express.json());
 
 server.use(authRouter);
+server.use(credentialRouter);
 
 server.use(errorHandler);
 

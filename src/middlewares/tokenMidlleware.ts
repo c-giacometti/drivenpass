@@ -1,8 +1,9 @@
 import jwt from 'jsonwebtoken';
 import { Request, Response, NextFunction } from 'express';
+import * as userService from "../services/userService.js";
 
 interface IToken {
-    id: string;
+    id: number;
 }
 
 export default async function validateToken(req: Request, res: Response, next: NextFunction) {
@@ -26,16 +27,16 @@ export default async function validateToken(req: Request, res: Response, next: N
     }
 
     const payload = jwt.verify(token, process.env.JWT_SECRET as string);
-    /* const user = await userService.getById((payload as IToken).id); */
+    const user = await userService.getUserById((payload as IToken).id);
 
-    /* if (!user) {
+    if (!user) {
         throw {
             type: "error_unauthorized",
             message: "invalid token"
         }
     }
 
-    res.locals.userId = user.id; */
+    res.locals.userId = user.id; 
 
     return next();
 

@@ -50,3 +50,12 @@ export async function login(
     return { token };
     
 }
+
+
+export async function getUserById(id: number) {
+
+    const user = await userRepository.findById(id);
+
+    return user;
+
+}
