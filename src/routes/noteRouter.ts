@@ -1,5 +1,5 @@
 import { Router } from "express";
-import { createNote } from "../controllers/noteController.js";
+import { createNote, getAllNotes } from "../controllers/noteController.js";
 import validateToken from "../middlewares/tokenMidlleware.js";
 
 const router = Router();
@@ -7,7 +7,7 @@ const router = Router();
 router
     .route("/notes")
     .post(validateToken, createNote)
-    .get(validateToken);
+    .get(validateToken, getAllNotes);
 
 router
     .route("/notes/:id")
