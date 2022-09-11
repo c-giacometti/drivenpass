@@ -11,14 +11,20 @@ export async function encryptPasswords(password: string){
     
 }
 
-export function encryptSensitiveData(){
+export function encryptSensitiveData(data: string){
+
+    return cryptr.encrypt(data);
 
 }
 
-export function decryptPasswords(){
+export function decryptPasswords(password: string, hashPassword: string){
+
+    return bcrypt.compareSync(password, hashPassword);
 
 }
 
-export function decryptSensitiveData(){
+export function decryptSensitiveData(data: string){
 
+    return cryptr.decrypt(data);
+    
 }
