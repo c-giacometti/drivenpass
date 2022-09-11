@@ -10,7 +10,7 @@ router
     .get(validateToken, getAllWifis);
 
 router
-    .route("/:id/wifi")
+    .route("/wifi/:id")
     .get(validateToken, getWifiById)
     .delete(validateToken, deleteWifi);
 
