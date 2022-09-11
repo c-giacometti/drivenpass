@@ -46,4 +46,15 @@ export async function getWifiById(req: Request, res: Response){
 
 export async function deleteWifi(req: Request, res: Response){
     
+    const { userId } = res.locals;
+    const { id } = req.params;
+
+    if(isNaN(parseInt(id))){
+        return res.sendStatus(400);
+    }
+
+    await wifiService.getById(userId, parseInt(id), "delete");
+
+    return res.status(200).send("wifi deleted successfully");
+
 }
