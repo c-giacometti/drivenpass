@@ -1,4 +1,3 @@
-import { number } from "joi";
 import * as credentialRepository from "../repositories/credentialRepository.js";
 import { decryptSensitiveData, encryptSensitiveData } from "../utils/encryptUtil.js";
 

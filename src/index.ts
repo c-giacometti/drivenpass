@@ -5,6 +5,7 @@ import dotenv from "dotenv";
 
 import authRouter from "./routes/authRouter.js";
 import credentialRouter from "./routes/credentialRouter.js";
+import noteRouter from "./routes/noteRouter.js";
 import errorHandler from "./middlewares/errorHandler.js";
 
 dotenv.config();
@@ -16,6 +17,7 @@ server.use(express.json());
 
 server.use(authRouter);
 server.use(credentialRouter);
+server.use(noteRouter);
 
 server.use(errorHandler);
 

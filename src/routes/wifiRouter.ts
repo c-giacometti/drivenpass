@@ -1,15 +1,16 @@
 import { Router } from "express";
+import validateToken from "../middlewares/tokenMidlleware.js";
 
 const router = Router();
 
 router
     .route("/wifi")
-    .post()
-    .get();
+    .post(validateToken)
+    .get(validateToken);
 
 router
     .route("/:id/wifi")
-    .get()
-    .delete();
+    .get(validateToken)
+    .delete(validateToken);
 
 export default router;
