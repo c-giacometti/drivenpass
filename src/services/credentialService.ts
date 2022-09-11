@@ -22,7 +22,9 @@ export async function create(
     
 }
 
-export async function getAll(userId: number){
+export async function getAll(
+    userId: number
+){
 
     const credentials = await credentialRepository.findAllCredentials(userId);
 
@@ -31,5 +33,32 @@ export async function getAll(userId: number){
     );
 
     return decryptedCredentials;
+
+}
+
+export async function getById(
+    userId: number, 
+    id: number
+){
+
+    const credential = await credentialRepository.findCredentialById(id);
+
+    if(!credential){
+        throw {
+            type: "error_not_found",
+            message: "credential does not exist"
+        }
+    }
+
+    if(userId !== credential.userId){
+        throw {
+            type: "error_forbidden",
+            message: "you can't access this credential"
+        }
+    }
+
+    const decryptedPassword = decryptSensitiveData(credential.password);
+
+    return {...credential, password: decryptedPassword };
 
 }

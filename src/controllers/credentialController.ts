@@ -25,12 +25,27 @@ export async function createCredential(req: Request, res: Response){
 
 }
 
-export async function getAllCredentials(req: Request, res: Response){
+export async function getAllCredentials(_req: Request, res: Response){
 
     const { userId } = res.locals;
 
     const credentials = await credentialService.getAll(userId);
 
     res.status(200).send(credentials);
-    
+
+}
+
+export async function getCredentialById(req: Request, res: Response){
+
+    const { userId } = res.locals;
+    const { id } = req.params;
+
+    if(isNaN(parseInt(id))){
+        return res.sendStatus(400);
+    }
+
+    const credential = await credentialService.getById(userId, parseInt(id));
+
+    res.status(200).send(credential);
+
 }
