@@ -21,7 +21,7 @@ export async function createCredential(req: Request, res: Response){
         password
     });
 
-    res.status(201).send("credential successfully created");
+    return res.status(201).send("credential successfully created");
 
 }
 
@@ -31,7 +31,7 @@ export async function getAllCredentials(_req: Request, res: Response){
 
     const credentials = await credentialService.getAll(userId);
 
-    res.status(200).send(credentials);
+    return res.status(200).send(credentials);
 
 }
 
@@ -46,7 +46,7 @@ export async function getCredentialById(req: Request, res: Response){
 
     const credential = await credentialService.getById(userId, parseInt(id), "find");
 
-    res.status(200).send(credential);
+    return res.status(200).send(credential);
 
 }
 
@@ -61,6 +61,6 @@ export async function deleteCredential(req: Request, res: Response){
 
     await credentialService.getById(userId, parseInt(id), "delete");
 
-    res.status(200).send("credential deleted sucessfully");
+    return res.status(200).send("credential deleted sucessfully");
 
 }

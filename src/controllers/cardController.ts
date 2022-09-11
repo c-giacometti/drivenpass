@@ -40,8 +40,30 @@ export async function getAllCards(req: Request, res: Response){
 
 export async function getCardById(req: Request, res: Response){
     
+    const { userId } = res.locals;
+    const { id } = req.params;
+
+    if(isNaN(parseInt(id))){
+        return res.sendStatus(400);
+    }
+
+    const card = await cardService.getById(userId, parseInt(id), "find");
+
+    return res.status(200).send(card);
+
 }
 
 export async function deleteCard(req: Request, res: Response){
     
+    const { userId } = res.locals;
+    const { id } = req.params;
+
+    if(isNaN(parseInt(id))){
+        return res.sendStatus(400);
+    }
+
+    await cardService.getById(userId, parseInt(id), "delete");
+
+    return res.status(200).send("card deleted sucessfully");
+
 }

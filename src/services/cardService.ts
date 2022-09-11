@@ -49,7 +49,7 @@ export async function getAll(
 
 }
 
-/* export async function getById(
+export async function getById(
     userId: number, 
     id: number,
     action: string
@@ -72,11 +72,15 @@ export async function getAll(
     }
 
     if(action === "find"){
-        return card;
+        return {
+            ...card, 
+            cvv: decryptSensitiveData(card.cvv), 
+            password: decryptSensitiveData(card.password)
+        }
     }
 
     if(action === "delete"){
-        await cardRepository.deletecard(id);
+        await cardRepository.deleteCard(id);
         return;
     }
 
@@ -85,4 +89,4 @@ export async function getAll(
         message: "coundn't proccess request"
     }    
 
-} */
+} 

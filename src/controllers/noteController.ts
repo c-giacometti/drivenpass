@@ -15,7 +15,7 @@ export async function createNote(req: Request, res: Response){
 
     await noteService.create({ userId, title, note });
 
-    res.status(201).send("note created successfully");
+    return res.status(201).send("note created successfully");
 
 }
 
@@ -40,7 +40,7 @@ export async function getNoteById(req: Request, res: Response){
 
     const note = await noteService.getById(userId, parseInt(id), "find");
 
-    res.status(200).send(note);
+    return res.status(200).send(note);
 
 }
 
@@ -55,5 +55,5 @@ export async function deleteNote(req: Request, res: Response){
 
     await noteService.getById(userId, parseInt(id), "delete");
 
-    res.status(200).send("note deleted successfully");
+    return res.status(200).send("note deleted successfully");
 }

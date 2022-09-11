@@ -33,7 +33,7 @@ export async function findAllCards(userId: number){
 
 }
 
-export async function findCardById(id: number) {
+export async function findById(id: number) {
     
     const result = await connection.card.findFirst({
         where: { id }

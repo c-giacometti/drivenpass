@@ -14,7 +14,7 @@ export async function createUser(req: Request, res: Response){
 
     await userService.create(email, password);
 
-    res.status(201).send("user created successfully");
+    return res.status(201).send("user created successfully");
 
 }
 
@@ -30,6 +30,6 @@ export async function loginUser(req: Request, res: Response){
 
     const { token } = await userService.login(email, password);
 
-    res.status(200).send({ token });
+    return res.status(200).send({ token });
 
 }
