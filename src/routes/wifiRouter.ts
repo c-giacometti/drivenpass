@@ -1,16 +1,17 @@
 import { Router } from "express";
+import { createWifi, deleteWifi, getAllWifis, getWifiById } from "../controllers/wifiController.js";
 import validateToken from "../middlewares/tokenMidlleware.js";
 
 const router = Router();
 
 router
     .route("/wifi")
-    .post(validateToken)
-    .get(validateToken);
+    .post(validateToken, createWifi)
+    .get(validateToken, getAllWifis);
 
 router
     .route("/:id/wifi")
-    .get(validateToken)
-    .delete(validateToken);
+    .get(validateToken, getWifiById)
+    .delete(validateToken, deleteWifi);
 
 export default router;
