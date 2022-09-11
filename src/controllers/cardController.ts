@@ -24,11 +24,17 @@ export async function createCard(req: Request, res: Response){
         isVirtual, 
         type });
 
-    res.status(201).send("card created successfully");
+    return res.status(201).send("card created successfully");
 
 }
 
 export async function getAllCards(req: Request, res: Response){
+
+    const { userId } = res.locals;
+
+    const cards = await cardService.getAll(userId);
+
+    return res.status(200).send(cards);
     
 }
 

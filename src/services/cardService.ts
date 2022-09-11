@@ -1,5 +1,5 @@
 import * as cardRepository from "../repositories/cardRepository.js";
-import { encryptSensitiveData } from "../utils/encryptUtil.js";
+import { decryptSensitiveData, encryptSensitiveData } from "../utils/encryptUtil.js";
 
 export async function create(
     cardData: cardRepository.ICardData
@@ -33,17 +33,23 @@ export async function create(
     
 }
 
-/* export async function getAll(
+export async function getAll(
     userId: number
 ){
 
-    const cards = await cardRepository.findAllcards(userId);
+    const cards = await cardRepository.findAllCards(userId);
 
-    return cards;
+    const decryptedCards = cards.map((card) => ({
+        ...card,
+        cvv: decryptSensitiveData(card.cvv),
+        password: decryptSensitiveData(card.password)
+    }));
+
+    return decryptedCards;
 
 }
 
-export async function getById(
+/* export async function getById(
     userId: number, 
     id: number,
     action: string
