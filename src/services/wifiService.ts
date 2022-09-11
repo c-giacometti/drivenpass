@@ -1,5 +1,5 @@
 import * as wifiRepository from "../repositories/wifiRepository.js";
-import { encryptSensitiveData } from "../utils/encryptUtil.js";
+import { decryptSensitiveData, encryptSensitiveData } from "../utils/encryptUtil.js";
 
 export async function create(
     wifiData: wifiRepository.IWifiData
@@ -14,12 +14,21 @@ export async function create(
         networkName,
         password: encryptedPassword
     });
-    
+
 }
 
 export async function getAll(
     userId: number
 ){
+
+    const wifis = await wifiRepository.findAllWifis(userId);
+
+    const decryptWifis = wifis.map((wifi) => ({
+        ...wifi,
+        password: decryptSensitiveData(wifi.password)
+    }));
+
+    return decryptWifis;
 
 }
 

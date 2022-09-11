@@ -20,6 +20,12 @@ export async function createWifi(req: Request, res: Response){
 }
 
 export async function getAllWifis(req: Request, res: Response){
+
+    const { userId } = res.locals;
+
+    const wifis = await wifiService.getAll(userId);
+
+    return res.status(200).send(wifis);
     
 }
 
